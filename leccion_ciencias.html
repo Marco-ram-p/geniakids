@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeniaKids</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+          body {
+    background: linear-gradient(135deg, #3d2b94, #4b3eea, #ffffff);
+    background-size: 200% 200%;
+    animation: moveGradient 8s ease infinite;
+    min-height: 100vh;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+
+
+
+        h1.title {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 4rem;
+            color: gold;
+            text-shadow: 3px 3px 6px #000;
+        }
+        .navbar-custom {
+            background: linear-gradient(90deg, #e74c3c, #8e44ad);
+        }
+        .navbar-brand {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 3em;
+            color: gold !important;
+            text-shadow: 4px 5px 6px #000
+        }
+        .card-custom {
+            border-radius: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-custom-red { background-color: #e74c3c; color: #fff; }
+        .btn-custom-purple { background-color: #8e44ad; color: #fff; }
+        .btn-custom-green { background-color: #2ecc71; color: #fff; }
+        .btn-custom-cyan { background-color: #1abc9c; color: #fff; }
+        .btn-custom-red:hover,
+        .btn-custom-purple:hover,
+        .btn-custom-green:hover,
+        .btn-custom-cyan:hover {
+            opacity: 0.85;
+         }
+        /* Efecto flotante para la imagen */
+        .float-img {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">GeniaKids</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="lecciones.html">Lecciones</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="juegos.html">Juegos</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="mascota.html">Mascota</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido -->
+    <div class="container mt-5 mb-5">
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+</head>
+<style>
+    video, canvas { 
+    border: 1px solid black; 
+    display: block; 
+    margin-bottom: 10px;
+  }
+  #cronometro {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  #estado {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: rgb(255, 255, 255);
+  }
+body {
+    background: linear-gradient(135deg, #3d2b94, #4c2882, #6a6cee);  /* Gradiente oscuro que se degrada suavemente */
+    background-size: 200% 200%;
+    animation: moveGradient 10s ease infinite;
+    min-height: 100vh;
+    font-family: 'Comic Sans MS', cursive;
+    color: #fff;
+}
+
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container-lesson {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #FFD700;
+    text-shadow: 2px 2px 5px #000;
+}
+
+#jinshi {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: url("{{ url_for('static', filename='image/jinshi.png') }}") no-repeat center/cover;
+    animation: floatJinshi 3s ease-in-out infinite;
+}
+
+@keyframes floatJinshi {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+#mic-btn {
+    position: fixed;
+    bottom: 150px;
+    right: 40px;
+    background: #FF1493;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.lesson-box {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+button.answer-btn {
+    padding: 12px 20px;
+    margin: 8px;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: linear-gradient(45deg, #32CD32, #00FF7F);
+    color: #fff;
+}
+
+button.answer-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#feedback {
+    font-size: 1.3rem;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+#start-practice, #next-btn {
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor: pointer;
+}
+
+#start-practice {
+    background:#32CD32;
+    color:#fff;
+}
+
+#next-btn {
+    background:#FFD700;
+    color:#000;
+}
+</style>
+
+<div class="container-lesson">
+    <h1 class="section-title">🌿 Lección de Ciencias: Ecosistemas y Ciclos Naturales</h1>
+    <p>Jinshi, tu asistente flotante, te enseñará paso a paso antes de practicar.</p>
+
+    <div id="lesson-content" class="lesson-box">
+        <!-- Explicaciones se cargarán aquí -->
+    </div>
+
+    <div id="practice-box" class="lesson-box" style="display:none;">
+        <h2 id="level-title"></h2>
+        <p id="question-text"></p>
+        <div id="answers-container"></div>
+        <div id="feedback"></div>
+        <button id="next-btn" style="display:none;">Siguiente ➜</button>
+    </div>
+
+    <button id="start-practice">¡Vamos a practicar!</button>
+</div>
+
+<div id="jinshi"></div>
+<button id="mic-btn" onclick="toggleCanvas()">🎤</button>
+
+<center>
+    <div id="estado">Estado: Concentrate por favor</div>
+    <div>⌚ Tiempo de estudio: <span id="cronometro">0:00</span></div>
+</center>
+
+<center>
+    <video id="webcam" width="640" height="480" autoplay muted style="visibility: hidden; position: absolute;"></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+</center>
+
+
+<script>
+    function toggleCanvas() {
+    const canvas = document.getElementById("canvas");
+
+    if (canvas.style.display === "none") {
+      canvas.style.display = "block";
+    } else {
+      canvas.style.display = "none";
+    }
+  }
+
+  // Asegura que el canvas esté visible al cargar
+  window.onload = () => {
+    canvas.style.display = "none";
+  };
+    let video = document.getElementById('webcam');
+    let canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext('2d');
+    let model;
+    let tiempo = 0; // segundos
+    let intervaloCronometro;
+    let personaDetectada = false;
+    let estadoTexto = document.getElementById('estado');
+    
+    // Función para formatear el tiempo en min:seg
+    function formatearTiempo(segundos) {
+        let min = Math.floor(segundos / 60);
+        let seg = segundos % 60;
+        return `${min}:${seg.toString().padStart(2,'0')}`;
+    }
+    
+    // Función para iniciar el cronómetro
+    function iniciarCronometro() {
+        if (!intervaloCronometro) {
+            intervaloCronometro = setInterval(() => {
+                tiempo++;
+                document.getElementById('cronometro').innerText = formatearTiempo(tiempo);
+            }, 1000);
+        }
+    }
+    
+    // Función para pausar el cronómetro
+    function pausarCronometro() {
+        clearInterval(intervaloCronometro);
+        intervaloCronometro = null;
+    }
+    
+    // Configurar webcam
+    async function setupWebcam() {
+        return new Promise((resolve, reject) => {
+            navigator.mediaDevices.getUserMedia({video: true})
+            .then(stream => {
+                video.srcObject = stream;
+                video.onloadedmetadata = () => {
+                    resolve(video);
+                };
+            })
+            .catch(err => reject(err));
+        });
+    }
+    
+    // Función principal de detección
+    async function detectar() {
+        const predictions = await model.detect(video);
+    
+        // Limpiar canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+        personaDetectada = false;
+    
+        predictions.forEach(pred => {
+            if (pred.class === 'person' && pred.score > 0.5) {
+                personaDetectada = true;
+                // Dibujar cuadro sobre la persona
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(pred.bbox[0], pred.bbox[1], pred.bbox[2], pred.bbox[3]);
+                ctx.font = "18px Arial";
+                ctx.fillStyle = 'red';
+                ctx.fillText(`Persona ${(pred.score*100).toFixed(0)}%`, pred.bbox[0], pred.bbox[1] > 20 ? pred.bbox[1]-5 : 10);
+            }
+        });
+    
+        // Actualizar estado
+        estadoTexto.innerText = personaDetectada ? "Gracias por estudiar" : "Concentrate por favor";
+    
+        // Control del cronómetro
+        if (personaDetectada) {
+            iniciarCronometro();
+        } else {
+            pausarCronometro();
+        }
+    
+        requestAnimationFrame(detectar);
+    }
+    
+    // Inicializar todo
+    async function main() {
+        await setupWebcam();
+        model = await cocoSsd.load();
+        detectar();
+    }
+    
+    main();
+    </script>
+
+<script>
+const lessons = [
+    { 
+        title: "Nivel 1: Pirámide Alimenticia",
+        explanation: "Es una representación que muestra cómo se transfieren los alimentos y la energía de un organismo a otro en un ecosistema. Los niveles principales son: Productores (plantas), Consumidores primarios (herbívoros), Consumidores secundarios (carnívoros que comen herbívoros) y Consumidores terciarios (animales que comen otros carnívoros).",
+        examples: ["Las plantas son productores porque hacen su propio alimento con luz solar.", "Un conejo (consumidor primario) come zanahorias (productor)."],
+        questions: [
+            { q: "¿Qué son los productores en la pirámide alimenticia?", options: ["Animales que comen plantas", "Plantas que producen alimento", "Animales que comen carne"], answer: "Plantas que producen alimento" },
+            { q: "¿Qué come un consumidor primario?", options: ["Otros carnívoros", "Plantas", "Herbívoros"], answer: "Plantas" }
+        ]
+    },
+    { 
+        title: "Nivel 2: Ciclo del Agua",
+        explanation: "Es el movimiento continuo del agua en la Tierra. Las fases principales son: Evaporación (agua se convierte en vapor), Condensación (vapor forma nubes), Precipitación (agua cae como lluvia) e Infiltración/Escorrentía (agua vuelve a ríos o se filtra al suelo).",
+        examples: ["El sol evapora el agua de los océanos.", "La lluvia es un ejemplo de precipitación."],
+        questions: [
+            { q: "¿Qué fase del ciclo del agua es cuando el agua cae como lluvia?", options: ["Evaporación", "Condensación", "Precipitación"], answer: "Precipitación" },
+            { q: "¿Dónde se forma el vapor de agua en el ciclo?", options: ["En las nubes", "En ríos y lagos", "En el suelo"], answer: "En ríos y lagos" }
+        ]
+    },
+    { 
+        title: "Nivel 3: Estados de la Materia",
+        explanation: "La materia puede estar en estados: Sólido (forma y volumen definidos), Líquido (volumen definido, sin forma fija) y Gas (sin forma ni volumen fijo).",
+        examples: ["El hielo es agua en estado sólido.", "El vapor de agua es un gas."],
+        questions: [
+            { q: "¿Cuál es el estado de la materia del agua líquida?", options: ["Sólido", "Líquido", "Gas"], answer: "Líquido" },
+            { q: "¿Qué estado no tiene forma ni volumen fijo?", options: ["Sólido", "Líquido", "Gas"], answer: "Gas" }
+        ]
+    },
+    { 
+        title: "Nivel 4: Animales Vertebrados e Invertebrados",
+        explanation: "Los vertebrados tienen columna vertebral (mamíferos, aves, peces, reptiles, anfibios). Los invertebrados no la tienen (insectos, moluscos, crustáceos).",
+        examples: ["Un perro es un vertebrado.", "Una araña es un invertebrado."],
+        questions: [
+            { q: "¿Qué tienen los vertebrados?", options: ["Columna vertebral", "Ocho patas", "Concha"], answer: "Columna vertebral" },
+            { q: "¿Es un insecto un vertebrado o invertebrado?", options: ["Vertebrado", "Invertebrado", "Ninguno"], answer: "Invertebrado" }
+        ]
+    },
+    { 
+        title: "Nivel 5: Seres Vivos y No Vivos",
+        explanation: "Los seres vivos crecen, se reproducen, respiran y se alimentan (plantas y animales). Los seres no vivos no cumplen funciones vitales (rocas, agua, aire).",
+        examples: ["Una flor es un ser vivo porque crece.", "Una roca es no viva."],
+        questions: [
+            { q: "¿Qué hacen los seres vivos?", options: ["Se reproducen", "No cambian", "Se evaporan"], answer: "Se reproducen" },
+            { q: "¿Es el aire un ser vivo?", options: ["Sí", "No", "A veces"], answer: "No" }
+        ]
+    },
+    { 
+        title: "Nivel 6: Tipos de Frutas y Plantas",
+        explanation: "Las frutas son semillas dentro de una pulpa (manzana, naranja). Las plantas producen alimento y oxígeno.",
+        examples: ["Una manzana es una fruta con semillas.", "Las plantas crecen hacia la luz del sol."],
+        questions: [
+            { q: "¿Qué contienen las frutas?", options: ["Semillas", "Hojas", "Raíces"], answer: "Semillas" },
+            { q: "¿Qué producen las plantas?", options: ["Oxígeno", "Agua", "Rocas"], answer: "Oxígeno" }
+        ]
+    },
+    { 
+        title: "Nivel 7: La Salud y la Higiene",
+        explanation: "Mantener hábitos de limpieza previene enfermedades. Ejemplo práctico: Lavarse las manos antes de comer, bañarse todos los días, cepillarse los dientes.",
+        examples: ["Lavarse las manos evita gérmenes.", "Cepillarse los dientes mantiene la boca sana."],
+        questions: [
+            { q: "¿Por qué es importante lavarse las manos?", options: ["Para divertirse", "Para prevenir enfermedades", "Para ahorrar agua"], answer: "Para prevenir enfermedades" },
+            { q: "¿Qué debes hacer todos los días para la higiene?", options: ["Comer dulces", "Bañarte", "Ver televisión"], answer: "Bañarte" }
+        ]
+    },
+    { 
+        title: "Nivel 8: Ejercicio Práctico: Identificar Seres Vivos y No Vivos",
+        explanation: "Identificar en tu entorno qué es vivo y qué no. Ejercicio: Observa y clasifica.",
+        examples: ["Un árbol es vivo porque crece.", "Una mesa es no viva."],
+        questions: [
+            { q: "¿Es una roca un ser vivo?", options: ["Sí", "No", "A veces"], answer: "No" },
+            { q: "¿Es un perro un ser vivo?", options: ["Sí", "No", "A veces"], answer: "Sí" }
+        ]
+    }
+];
+
+let currentLesson = 0;
+let currentQuestion = 0;
+
+const lessonContent = document.getElementById("lesson-content");
+const practiceBox = document.getElementById("practice-box");
+const levelTitle = document.getElementById("level-title");
+const questionText = document.getElementById("question-text");
+const answersContainer = document.getElementById("answers-container");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("next-btn");
+const startPractice = document.getElementById("start-practice");
+
+function showLesson() {
+    const lesson = lessons[currentLesson];
+    lessonContent.innerHTML = `<h2>${lesson.title}</h2>
+        <p>${lesson.explanation}</p>
+        <p><strong>Ejemplos:</strong></p>
+        <ul>${lesson.examples.map(ex => `<li>${ex}</li>`).join("")}</ul>`;
+}
+
+function startPracticeLevel() {
+    lessonContent.style.display = "none";
+    startPractice.style.display = "none";
+    practiceBox.style.display = "block";
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const lesson = lessons[currentLesson];
+    const question = lesson.questions[currentQuestion];
+
+    levelTitle.textContent = lesson.title;
+    questionText.textContent = question.q;
+    answersContainer.innerHTML = "";
+    question.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.className = "answer-btn";
+        btn.onclick = () => checkAnswer(opt);
+        answersContainer.appendChild(btn);
+    });
+    feedback.textContent = "";
+    nextBtn.style.display = "none";
+}
+
+function checkAnswer(selected) {
+    const question = lessons[currentLesson].questions[currentQuestion];
+    if(selected === question.answer){
+        feedback.textContent = "✅ ¡Correcto!";
+        feedback.style.color = "#32CD32";
+    } else {
+        feedback.textContent = `❌ Incorrecto. La respuesta correcta era ${question.answer}`;
+        feedback.style.color = "#FF4500";
+    }
+    nextBtn.style.display = "inline-block";
+}
+
+nextBtn.onclick = () => {
+    currentQuestion++;
+    const lesson = lessons[currentLesson];
+    if(currentQuestion >= lesson.questions.length){
+        currentLesson++;
+        currentQuestion = 0;
+        if(currentLesson >= lessons.length){
+            practiceBox.innerHTML = "<h2>🎉 ¡Felicidades! Has completado la lección de Ciencias</h2>";
+            return;
+        } else {
+            lessonContent.style.display = "block";
+            practiceBox.style.display = "none";
+            showLesson();
+            startPractice.style.display = "inline-block";
+        }
+    } else {
+        loadQuestion();
+    }
+}
+
+startPractice.onclick = () => startPracticeLevel();
+
+showLesson();
+</script>

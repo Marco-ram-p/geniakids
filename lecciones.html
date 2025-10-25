@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeniaKids</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+          body {
+    background: linear-gradient(135deg, #3d2b94, #4b3eea, #ffffff);
+    background-size: 200% 200%;
+    animation: moveGradient 8s ease infinite;
+    min-height: 100vh;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+
+
+
+        h1.title {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 4rem;
+            color: gold;
+            text-shadow: 3px 3px 6px #000;
+        }
+        .navbar-custom {
+            background: linear-gradient(90deg, #e74c3c, #8e44ad);
+        }
+        .navbar-brand {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 3em;
+            color: gold !important;
+            text-shadow: 4px 5px 6px #000
+        }
+        .card-custom {
+            border-radius: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-custom-red { background-color: #e74c3c; color: #fff; }
+        .btn-custom-purple { background-color: #8e44ad; color: #fff; }
+        .btn-custom-green { background-color: #2ecc71; color: #fff; }
+        .btn-custom-cyan { background-color: #1abc9c; color: #fff; }
+        .btn-custom-red:hover,
+        .btn-custom-purple:hover,
+        .btn-custom-green:hover,
+        .btn-custom-cyan:hover {
+            opacity: 0.85;
+         }
+        /* Efecto flotante para la imagen */
+        .float-img {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="/">GeniaKids</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="lecciones.html">Lecciones</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="juegos,html">Juegos</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="mascota.html">Mascota</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido -->
+    <div class="container mt-5 mb-5">
+        
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<div class="text-center">
+    <h1 class="section-title mb-3" style="color: #ffd700; font-weight: 800;">📚 Lecciones</h1>
+    <p class="fs-5 mb-5">¡Aprende de manera divertida y explora tus materias favoritas! </p>
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- Matemáticas -->
+        <div class="col-md-4">
+            <a href="leccion_matematicas.html" class="text-decoration-none">
+                <div class="card p-4 shadow lesson-card" style="background: #DC381F; color: white;">
+                    <i class="fas fa-square-root-alt fa-3x mb-3 text-white bounce-icon"></i>
+                    <h3>Matemáticas</h3>
+                    <p>Aprende sumas, restas y juega con los números con Genio el robot 🤖.</p>
+                    <button class="btn btn-light mt-3">Ir a la lección ➜</button>
+                </div>
+            </a>
+        </div>
+
+        <!-- Ciencias -->
+        <div class="col-md-4">
+            <a href="leccion_ciencias.html" class="text-decoration-none">
+                <div class="card p-4 shadow lesson-card" style="background: #2ca880; color: white;">
+                    <i class="fas fa-flask fa-3x mb-3 text-white bounce-icon"></i>
+                    <h3>Ciencias</h3>
+                    <p>Explora animales, plantas y experimentos súper divertidos 🔬🌱.</p>
+                    <button class="btn btn-light mt-3">Ir a la lección ➜</button>
+                </div>
+            </a>
+        </div>
+
+        <!-- Inglés -->
+        <div class="col-md-4">
+            <a href="leccion_ingles.html" class="text-decoration-none">
+                <div class="card p-4 shadow lesson-card" style="background: #bc4ed8; color: white;">
+                    <i class="fas fa-book-open fa-3x mb-3 text-white bounce-icon"></i>
+                    <h3>Inglés</h3>
+                    <p>Aprende palabras nuevas con imágenes, sonidos y colores 🎧🧩.</p>
+                    <button class="btn btn-light mt-3">Ir a la lección ➜</button>
+                </div>
+            </a>
+        </div>
+
+        <!-- Inglés identificar objetos-->
+        <div class="col-md-4">
+            <a href="camara_ingles.html" class="text-decoration-none">
+                <div class="card p-4 shadow lesson-card" style="background: #604ed8; color: white;">
+                    <i class="fa-solid fa-camera fa-3x mb-3 text-white bounce-icon"></i>
+                    <h3>Objetos en ingles</h3>
+                    <p>Aprende el nobre de objetos en ingles por medio de tu camara e inteligencia artificial 🎧🧩.</p>
+                    <button class="btn btn-light mt-3">Ir a la lección ➜</button>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<style>
+.lesson-card {
+    border-radius: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lesson-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+}
+.bounce-icon {
+    animation: bounce 1.5s infinite;
+}
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+</style>
+

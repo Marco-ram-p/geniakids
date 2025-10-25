@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeniaKids</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+          body {
+    background: linear-gradient(135deg, #3d2b94, #4b3eea, #ffffff);
+    background-size: 200% 200%;
+    animation: moveGradient 8s ease infinite;
+    min-height: 100vh;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+.container-lesson{
+  margin-left: 10%;
+  margin-right: 10%;
+}
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+
+
+
+        h1.title {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 4rem;
+            color: gold;
+            text-shadow: 3px 3px 6px #000;
+        }
+        .navbar-custom {
+            background: linear-gradient(90deg, #e74c3c, #8e44ad);
+        }
+        .navbar-brand {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 3em;
+            color: gold !important;
+            text-shadow: 4px 5px 6px #000
+        }
+        .card-custom {
+            border-radius: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-custom-red { background-color: #e74c3c; color: #fff; }
+        .btn-custom-purple { background-color: #8e44ad; color: #fff; }
+        .btn-custom-green { background-color: #2ecc71; color: #fff; }
+        .btn-custom-cyan { background-color: #1abc9c; color: #fff; }
+        .btn-custom-red:hover,
+        .btn-custom-purple:hover,
+        .btn-custom-green:hover,
+        .btn-custom-cyan:hover {
+            opacity: 0.85;
+         }
+        /* Efecto flotante para la imagen */
+        .float-img {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">GeniaKids</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="lecciones.html">Lecciones</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="juegos.html">Juegos</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="mascota.html">Mascota</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido -->
+    <div class="container mt-5 mb-5">
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+<head>
+    <meta charset="utf-8" />
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+  
+    <meta name="description" content="Usa la webcam para identificar el color en el centro de la pantalla.">
+  
+    <style>
+      /* small import map placeholder for future libs */
+    </style>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root{
+  --bg:#ffffff;
+  --text:#ffffff;
+  --muted:#666;
+  --card-bg:#f7f7f7;
+  --accent: #111;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text);
+  
+  
+  align-items:center;
+  justify-content:center;
+}
+
+.app{
+  width:100%;
+}
+
+h1{
+  margin:0 0 12px 0;
+  font-size:18px;
+  font-weight:700;
+}
+
+.viewer{
+  position:relative;
+  background:#000;
+  width:100%;
+  height:480px;
+  border-radius:8px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scaleX(-1); /* mirror for user */
+}
+
+canvas{
+  display:block;
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+}
+
+.crosshair{
+  position:absolute;
+  width:48px;
+  height:48px;
+  border:2px solid rgba(255,255,255,0.9);
+  border-radius:6px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  pointer-events:none;
+}
+
+.info{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-top:12px;
+  background:var(--card-bg);
+  padding:12px;
+  border-radius:8px;
+}
+
+.swatch{
+  width:64px;
+  height:64px;
+  border-radius:6px;
+  border:1px solid #ddd;
+  background:linear-gradient(45deg,#eee,#fff);
+}
+
+.values{font-size:20px;color:var(--muted)}
+.values div{margin-bottom:6px}
+
+.actions{margin-left:auto;display:flex;gap:8px}
+button{
+  background:transparent;
+  border:1px solid #ccc;
+  padding:8px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-weight:600;
+}
+button:active{transform:translateY(1px)}
+.note{margin-top:8px;color:var(--muted);font-size:13px}
+
+.detected-list{
+  margin-top:10px;
+  font-size:24px;
+  color:#fff;
+  background:transparent;
+  padding:8px;
+  border-radius:6px;
+  border:1px dashed #e6e6e6;
+}
+    </style>
+    <script type="importmap">
+    {
+      "imports": {
+        /* ...existing map... */
+      }
+    }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.21.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2/dist/coco-ssd.min.js"></script>
+  </head>
+  <div class="container-lesson">
+    <main class="app">
+      <h1>Buscador de objetos en ingles con IA</h1>
+      <p>Puedes mostrar a la camara un objeto si quieres saber su nombre en ingles o puedes poner un color en el centro de la pantalla para identificarlo.</p>
+      <div class="viewer">
+        <video id="video" autoplay playsinline muted></video>
+        <canvas id="overlay" aria-hidden="true"></canvas>
+        <div class="crosshair" aria-hidden="true"></div>
+      </div>
+  
+      <section class="info" aria-live="polite">
+        <div class="swatch" id="swatch" title="Color detectado"></div>
+        <div class="values">
+          <div><strong>Nombre:</strong> <span id="name">--</span></div>
+          <div><strong>HEX:</strong> <span id="hex">--</span></div>
+          <div style="display: none;"><strong>RGB:</strong> <span id="rgb">--</span></div>
+          <div style="display: none;"><strong>HSL:</strong> <span id="hsl">--</span></div>
+          
+        </div>
+        <div class="actions">
+          <button id="copyBtn">Copiar HEX</button>
+          <button id="pauseBtn">Pausar</button>
+          <button id="camBtn">Apagar cámara</button>
+        </div>
+      </section>
+  
+      <div class="detected-list" id="detectedList" aria-live="polite">Objetos: --</div>
+  
+    </main>
+</div>
+    <script type="module">
+        /* ...existing code... */
+const video = document.getElementById('video');
+const canvas = document.createElement('canvas');
+const overlay = document.getElementById('overlay');
+const swatch = document.getElementById('swatch');
+const hexEl = document.getElementById('hex');
+const rgbEl = document.getElementById('rgb');
+const hslEl = document.getElementById('hsl');
+const nameEl = document.getElementById('name');
+const copyBtn = document.getElementById('copyBtn');
+const pauseBtn = document.getElementById('pauseBtn');
+const camBtn = document.getElementById('camBtn');
+const detectedList = document.getElementById('detectedList');
+
+let stream = null;
+let running = true;
+let cocoModel = null;
+let lastDetect = 0;
+const DETECT_INTERVAL = 500; // ms
+const overlayCtx = overlay.getContext('2d');
+
+async function loadModel(){
+  try{
+    cocoModel = await cocoSsd.load();
+    console.log('coco-ssd loaded');
+  }catch(e){
+    console.error('Error loading coco-ssd', e);
+  }
+}
+
+async function startCamera(){
+  try{
+    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" }, audio: false });
+    video.srcObject = stream;
+    await video.play();
+    setupCanvas();
+    await loadModel();
+    requestAnimationFrame(tick);
+  }catch(err){
+    console.error('No se pudo acceder a la cámara', err);
+    alert('No se pudo acceder a la cámara. Revisa permisos.');
+  }
+}
+
+function setupCanvas(){
+  const vw = video.videoWidth || 1280;
+  const vh = video.videoHeight || 720;
+  canvas.width = vw;
+  canvas.height = vh;
+  overlay.width = vw;
+  overlay.height = vh;
+  overlay.style.display = 'block';
+  // clear overlay
+  overlayCtx.clearRect(0,0,overlay.width,overlay.height);
+}
+
+function getCenterPixel(){
+  const vw = video.videoWidth;
+  const vh = video.videoHeight;
+  if(!vw || !vh) return null;
+  // draw current video frame to offscreen canvas
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const cx = Math.floor(canvas.width / 2);
+  const cy = Math.floor(canvas.height / 2);
+  // sample a small area (5x5) and average for stability
+  const size = 1;
+  const half = Math.floor(size/2);
+  let r=0,g=0,b=0,count=0;
+  for(let dx=-half; dx<=half; dx++){
+    for(let dy=-half; dy<=half; dy++){
+      const px = cx + dx;
+      const py = cy + dy;
+      if(px<0 || py<0 || px>=canvas.width || py>=canvas.height) continue;
+      const data = ctx.getImageData(px,py,1,1).data;
+      r += data[0]; g += data[1]; b += data[2];
+      count++;
+    }
+  }
+  if(count===0) return null;
+  return {
+    r: Math.round(r/count),
+    g: Math.round(g/count),
+    b: Math.round(b/count)
+  };
+}
+
+function rgbToHex({r,g,b}){
+  return "#" + [r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('').toUpperCase();
+}
+
+function rgbToHsl(r,g,b){
+  r/=255; g/=255; b/=255;
+  const max=Math.max(r,g,b), min=Math.min(r,g,b);
+  let h=0, s=0, l=(max+min)/2;
+  if(max!==min){
+    const d = max-min;
+    s = l>0.5 ? d/(2-max-min) : d/(max+min);
+    switch(max){
+      case r: h = (g-b)/d + (g<b?6:0); break;
+      case g: h = (b-r)/d + 2; break;
+      case b: h = (r-g)/d + 4; break;
+    }
+    h /= 6;
+  }
+  return `hsl(${Math.round(h*360)}, ${Math.round(s*100)}%, ${Math.round(l*100)}%)`;
+}
+
+let color = null;
+function updateUI(col){
+  if(!col) return;
+  const hex = rgbToHex(col);
+  swatch.style.background = hex;
+  hexEl.textContent = hex;
+  rgbEl.textContent = `rgb(${col.r}, ${col.g}, ${col.b})`;
+  hslEl.textContent = rgbToHsl(col.r,col.g,col.b);
+  nameEl.textContent = getColorName(col);
+  color = getColorName(col);
+  // adjust text color for contrast on swatch if needed
+  const luminance = (0.2126*col.r + 0.7152*col.g + 0.0722*col.b)/255;
+  const textColor = luminance > 0.6 ? '#000' : '#fff';
+  swatch.style.color = textColor;
+}
+
+/* simple named color list and nearest-color classifier */
+const NAMED_COLORS = {
+  "Black": [0,0,0],
+  "White": [255,255,255],
+  "Red": [255,0,0],
+  "Green": [0,128,0],
+  "Blue": [0,0,255],
+  "Yellow": [255,255,0],
+  "Cyan": [0,255,255],
+  "Magenta": [255,0,255],
+  "Orange": [255,165,0],
+  "Pink": [255,192,203],
+  "Purple": [128,0,128],
+  "Brown": [165,42,42],
+  "Gray": [128,128,128],
+  "Olive": [128,128,0],
+  "Teal": [0,128,128],
+  "Navy": [0,0,128]
+};
+
+function getColorName({r,g,b}){
+  let bestName = 'Desconocido';
+  let bestDist = Infinity;
+  for(const [name, rgb] of Object.entries(NAMED_COLORS)){
+    const dr = r - rgb[0], dg = g - rgb[1], db = b - rgb[2];
+    const dist = dr*dr + dg*dg + db*db;
+    if(dist < bestDist){
+      bestDist = dist;
+      bestName = name;
+    }
+  }
+  return bestName;
+}
+
+async function tick(){
+  if(running && video.readyState >= 2){
+    const color = getCenterPixel();
+    if(color) updateUI(color);
+
+    const now = performance.now();
+    if(cocoModel && now - lastDetect > DETECT_INTERVAL){
+      lastDetect = now;
+      try{
+        const predictions = await cocoModel.detect(video);
+        drawDetections(predictions);
+      }catch(e){
+        console.error('detection error', e);
+      }
+    }
+  }
+  requestAnimationFrame(tick);
+}
+
+let objetos_pantalla = []; // tu lista dinámica
+let hablando = false;
+let prevLength = 0;
+
+function drawDetections(predictions){
+  overlayCtx.clearRect(0,0,overlay.width,overlay.height);
+  // mirror context horizontally to match mirrored video
+  overlayCtx.save();
+  overlayCtx.scale(-1,1);
+  overlayCtx.translate(-overlay.width,0);
+
+  overlayCtx.lineWidth = 2;
+  overlayCtx.font = '16px "Noto Sans", sans-serif';
+  overlayCtx.textBaseline = 'top';
+
+  const seen = {};
+  predictions.forEach(pred=>{
+    const [x,y,w,h] = pred.bbox;
+    // draw box
+    overlayCtx.strokeStyle = 'rgba(255,200,0,0.9)';
+    overlayCtx.fillStyle = 'rgba(0,0,0,0.4)';
+    overlayCtx.strokeRect(x, y, w, h);
+    // label background
+    const label = `${pred.class} (${Math.round(pred.score*100)}%)`;
+    const textW = overlayCtx.measureText(label).width + 8;
+    overlayCtx.fillRect(x, y - 20, textW, 20);
+    overlayCtx.fillStyle = '#fff';
+    overlayCtx.fillText(label, x + 4, y - 18);
+
+    // accumulate names for list
+    seen[pred.class] = (seen[pred.class] || 0) + 1;
+  });
+
+  overlayCtx.restore();
+
+  // update text list below viewer
+  const entries = Object.entries(seen);
+  if(entries.length === 0){
+    detectedList.textContent = 'Objetos: Ninguno';
+  }else{
+    const parts = entries.map(([name,count]) => count>1 ? `${name} x${count}` : name);
+    detectedList.textContent = 'Objetos: ' + parts.join(', ');
+    objetos_pantalla = parts;
+  }
+}
+
+
+let prevList = [];      // estado previo de objetos
+let prevColor = "";     // estado previo de color
+ hablando = false;   // evita solapamiento de voz
+
+// Función de voz asíncrona
+async function speak(text) {
+  return new Promise(resolve => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 1;
+    utterance.pitch = 1;
+    utterance.onend = resolve;
+    window.speechSynthesis.speak(utterance);
+  });
+}
+
+// === Función para anunciar objetos ===
+async function announceObjects() {
+  if (hablando) return;
+  if (!objetos_pantalla || objetos_pantalla.length === 0) return;
+
+  hablando = true;
+
+  for (const item of objetos_pantalla) {
+    const match = item.match(/^(.*)\sx(\d+)$/i);
+    let phrase = '';
+    if (match) {
+      const name = match[1].trim();
+      const count = parseInt(match[2]);
+      phrase = `${count} ${name}${count > 1 ? 's' : ''}`;
+    } else {
+      phrase = item;
+    }
+    await speak(phrase);
+  }
+
+  hablando = false;
+}
+
+// === Función para anunciar color ===
+async function announceColor() {
+  if (hablando) return; // si se están anunciando objetos, no interrumpir
+  if (!color || color.trim() === "" || color === prevColor) return;
+
+  hablando = true;
+  await speak("color " + color);
+  prevColor = color;
+  hablando = false;
+}
+
+// === Intervalo para objetos cada 0.4 segundos ===
+setInterval(() => {
+  let listChanged = false;
+
+  if (objetos_pantalla.length === 0) {
+    // Resetear prevList si la lista está vacía
+    prevList = [];
+  } else {
+    // Si la lista anterior estaba vacía → hablar
+    if (prevList.length === 0) {
+      listChanged = true;
+    } else if (JSON.stringify(objetos_pantalla) !== JSON.stringify(prevList)) {
+      // Lista no vacía y diferente → hablar
+      listChanged = true;
+    }
+  }
+
+  if (listChanged) {
+    announceObjects();
+    prevList = [...objetos_pantalla]; // actualizar prevList
+  }
+}, 400);
+
+// === Intervalo para color cada 2 segundos ===
+setInterval(() => {
+  // Color solo se anuncia si no se está hablando (objetos tienen prioridad)
+  announceColor();
+}, 5000);
+
+copyBtn.addEventListener('click', async ()=>{
+  const hex = hexEl.textContent;
+  if(!hex || hex === '--') return;
+  try{
+    await navigator.clipboard.writeText(hex);
+    copyBtn.textContent = 'Copiado';
+    setTimeout(()=>copyBtn.textContent = 'Copiar HEX',900);
+  }catch(e){
+    alert('No se pudo copiar');
+  }
+});
+
+pauseBtn.addEventListener('click', ()=>{
+  running = !running;
+  pauseBtn.textContent = running ? 'Pausar' : 'Reanudar';
+});
+
+camBtn.addEventListener('click', async ()=>{
+  if(stream){
+    // stop all tracks to turn off camera
+    stream.getTracks().forEach(t=>t.stop());
+    video.srcObject = null;
+    stream = null;
+    running = false;
+    camBtn.textContent = 'Encender cámara';
+    pauseBtn.disabled = true;
+  }else{
+    // restart camera
+    pauseBtn.disabled = false;
+    camBtn.textContent = 'Apagar cámara';
+    running = true;
+    await startCamera();
+  }
+});
+
+startCamera();
+
+/* ...existing code... */
+    </script>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeniaKids</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+          body {
+    background: linear-gradient(135deg, #3d2b94, #4b3eea, #ffffff);
+    background-size: 200% 200%;
+    animation: moveGradient 8s ease infinite;
+    min-height: 100vh;
+    color: #fff;
+    font-family: 'Roboto', sans-serif;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+
+
+
+        h1.title {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 4rem;
+            color: gold;
+            text-shadow: 3px 3px 6px #000;
+        }
+        .navbar-custom {
+            background: linear-gradient(90deg, #e74c3c, #8e44ad);
+        }
+        .navbar-brand {
+            font-family: 'Luckiest Guy', cursive;
+            font-size: 3em;
+            color: gold !important;
+            text-shadow: 4px 5px 6px #000
+        }
+        .card-custom {
+            border-radius: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .card-custom:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+        }
+        .btn-icon {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-custom-red { background-color: #e74c3c; color: #fff; }
+        .btn-custom-purple { background-color: #8e44ad; color: #fff; }
+        .btn-custom-green { background-color: #2ecc71; color: #fff; }
+        .btn-custom-cyan { background-color: #1abc9c; color: #fff; }
+        .btn-custom-red:hover,
+        .btn-custom-purple:hover,
+        .btn-custom-green:hover,
+        .btn-custom-cyan:hover {
+            opacity: 0.85;
+         }
+        /* Efecto flotante para la imagen */
+        .float-img {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">GeniaKids</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="lecciones.html">Lecciones</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="juegos.html">Juegos</a></li>
+                    <li class="nav-item"><a class="nav-link text-white fw-bold" href="mascota.html">Mascota</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido -->
+    <div class="container mt-5 mb-5">
+    
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+</head>
+<style>
+    video, canvas { 
+    border: 1px solid black; 
+    display: block; 
+    margin-bottom: 10px;
+  }
+  #cronometro {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  #estado {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: rgb(255, 255, 255);
+  }
+body {
+    background: linear-gradient(135deg, #3d2b94, #4c2882, #2e1a47);
+    background-size: 200% 200%;
+    animation: moveGradient 10s ease infinite;
+    min-height: 100vh;
+    font-family: 'Comic Sans MS', cursive;
+    color: #fff;
+}
+
+@keyframes moveGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container-lesson {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #FFD700;
+    text-shadow: 2px 2px 5px #000;
+}
+
+#jinshi {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: url("{{ url_for('static', filename='image/jinshi.png') }}") no-repeat center/cover;
+    animation: floatJinshi 3s ease-in-out infinite;
+}
+
+@keyframes floatJinshi {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+#mic-btn {
+    position: fixed;
+    bottom: 150px;
+    right: 40px;
+    background: #FF1493;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.lesson-box {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+button.answer-btn {
+    padding: 12px 20px;
+    margin: 8px;
+    font-size: 1.2rem;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background: linear-gradient(45deg, #32CD32, #00FF7F);
+    color: #fff;
+}
+
+button.answer-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#feedback {
+    font-size: 1.3rem;
+    margin: 15px 0;
+    font-weight: bold;
+}
+
+#start-practice, #next-btn {
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor: pointer;
+}
+
+#start-practice {
+    background:#32CD32;
+    color:#fff;
+}
+
+#next-btn {
+    background:#FFD700;
+    color:#000;
+}
+</style>
+
+<div class="container-lesson">
+    <h1 class="section-title">🇺🇸 Lección de Inglés: Vocabulario y Gramática Básica</h1>
+    <p>Jinshi, tu asistente flotante 🤖, te enseñará inglés paso a paso con mucho contenido para aprender bien. ¡Practica y diviértete!</p>
+
+    <div id="lesson-content" class="lesson-box">
+        <!-- Explicaciones se cargarán aquí -->
+    </div>
+
+    <div id="practice-box" class="lesson-box" style="display:none;">
+        <h2 id="level-title"></h2>
+        <p id="question-text"></p>
+        <div id="answers-container"></div>
+        <div id="feedback"></div>
+        <button id="next-btn" style="display:none;">Siguiente ➜</button>
+    </div>
+
+    <button id="start-practice">¡Vamos a practicar!</button>
+</div>
+
+<div id="jinshi"></div>
+<button id="mic-btn" onclick="toggleCanvas()">🎤</button>
+
+<center>
+    <div id="estado">Estado: Concentrate por favor</div>
+    <div>⌚ Tiempo de estudio: <span id="cronometro">0:00</span></div>
+</center>
+
+<center>
+    <video id="webcam" width="640" height="480" autoplay muted style="visibility: hidden; position: absolute;"></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+</center>
+
+
+<script>
+    function toggleCanvas() {
+    const canvas = document.getElementById("canvas");
+
+    if (canvas.style.display === "none") {
+      canvas.style.display = "block";
+    } else {
+      canvas.style.display = "none";
+    }
+  }
+
+  // Asegura que el canvas esté visible al cargar
+  window.onload = () => {
+    canvas.style.display = "none";
+  };
+    let video = document.getElementById('webcam');
+    let canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext('2d');
+    let model;
+    let tiempo = 0; // segundos
+    let intervaloCronometro;
+    let personaDetectada = false;
+    let estadoTexto = document.getElementById('estado');
+    
+    // Función para formatear el tiempo en min:seg
+    function formatearTiempo(segundos) {
+        let min = Math.floor(segundos / 60);
+        let seg = segundos % 60;
+        return `${min}:${seg.toString().padStart(2,'0')}`;
+    }
+    
+    // Función para iniciar el cronómetro
+    function iniciarCronometro() {
+        if (!intervaloCronometro) {
+            intervaloCronometro = setInterval(() => {
+                tiempo++;
+                document.getElementById('cronometro').innerText = formatearTiempo(tiempo);
+            }, 1000);
+        }
+    }
+    
+    // Función para pausar el cronómetro
+    function pausarCronometro() {
+        clearInterval(intervaloCronometro);
+        intervaloCronometro = null;
+    }
+    
+    // Configurar webcam
+    async function setupWebcam() {
+        return new Promise((resolve, reject) => {
+            navigator.mediaDevices.getUserMedia({video: true})
+            .then(stream => {
+                video.srcObject = stream;
+                video.onloadedmetadata = () => {
+                    resolve(video);
+                };
+            })
+            .catch(err => reject(err));
+        });
+    }
+    
+    // Función principal de detección
+    async function detectar() {
+        const predictions = await model.detect(video);
+    
+        // Limpiar canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+        personaDetectada = false;
+    
+        predictions.forEach(pred => {
+            if (pred.class === 'person' && pred.score > 0.5) {
+                personaDetectada = true;
+                // Dibujar cuadro sobre la persona
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(pred.bbox[0], pred.bbox[1], pred.bbox[2], pred.bbox[3]);
+                ctx.font = "18px Arial";
+                ctx.fillStyle = 'red';
+                ctx.fillText(`Persona ${(pred.score*100).toFixed(0)}%`, pred.bbox[0], pred.bbox[1] > 20 ? pred.bbox[1]-5 : 10);
+            }
+        });
+    
+        // Actualizar estado
+        estadoTexto.innerText = personaDetectada ? "Gracias por estudiar" : "Concentrate por favor";
+    
+        // Control del cronómetro
+        if (personaDetectada) {
+            iniciarCronometro();
+        } else {
+            pausarCronometro();
+        }
+    
+        requestAnimationFrame(detectar);
+    }
+    
+    // Inicializar todo
+    async function main() {
+        await setupWebcam();
+        model = await cocoSsd.load();
+        detectar();
+    }
+    
+    main();
+    </script>
+
+<script>
+const lessons = [
+    { 
+        title: "Nivel 1: Saludos y Presentaciones",
+        explanation: "¡Hola! En inglés, los saludos son importantes para ser amable. 'Hello' significa hola, y 'Hi' es más informal. Para presentarte, di 'My name is [tu nombre]'. También aprendemos 'Goodbye' (adiós) y 'Thank you' (gracias). Practica estos para hablar con amigos o en la escuela. Recuerda: el inglés usa el orden sujeto-verbo-objeto, como 'I am happy' (Yo estoy feliz).",
+        examples: ["Hello! My name is Ana. (¡Hola! Mi nombre es Ana.)", "Hi, how are you? (Hola, ¿cómo estás?)", "Goodbye, see you later! (Adiós, ¡nos vemos luego!)", "Thank you for helping. (Gracias por ayudar.)"],
+        questions: [
+            { q: "¿Cómo se dice 'Hola' en inglés?", options: ["Hello", "Goodbye", "Thank you"], answer: "Hello" },
+            { q: "Completa: My name is _____.", options: ["Ana", "Hello", "Goodbye"], answer: "Ana" },
+            { q: "¿Qué significa 'Thank you'?", options: ["Hola", "Gracias", "Adiós"], answer: "Gracias" }
+        ]
+    },
+    { 
+        title: "Nivel 2: Números y Colores",
+        explanation: "Los números en inglés son fáciles: 1 es 'one', 2 es 'two', hasta 10. Para colores, 'red' es rojo, 'blue' es azul. Usa frases como 'I see a red apple' (Veo una manzana roja). Esto ayuda en la vida diaria, como contar objetos o describir cosas. Practica diciendo números en voz alta y asociándolos con colores para recordar mejor.",
+        examples: ["One, two, three... (Uno, dos, tres...)", "The sky is blue. (El cielo es azul.)", "I have five red balls. (Tengo cinco bolas rojas.)", "Green is my favorite color. (El verde es mi color favorito.)"],
+        questions: [
+            { q: "¿Cómo se dice 'cinco' en inglés?", options: ["Five", "Four", "Six"], answer: "Five" },
+            { q: "¿Qué color es 'blue'?", options: ["Rojo", "Azul", "Verde"], answer: "Azul" },
+            { q: "Completa: The apple is _____.", options: ["red", "blue", "yellow"], answer: "red" }
+        ]
+    },
+    { 
+        title: "Nivel 3: Familia y Animales",
+        explanation: "La familia en inglés: 'Mother' (mamá), 'Father' (papá), 'Brother' (hermano), 'Sister' (hermana). Para animales: 'Dog' (perro), 'Cat' (gato), 'Bird' (pájaro). Frases útiles: 'My family is big' (Mi familia es grande). Aprende esto para hablar de tu hogar y mascotas. Incluye plurales: 'dogs' para muchos perros. ¡Dibuja tu familia y nómbrala en inglés!",
+        examples: ["My mother is a teacher. (Mi mamá es maestra.)", "I have a dog and a cat. (Tengo un perro y un gato.)", "My brother likes birds. (A mi hermano le gustan los pájaros.)", "The family eats together. (La familia come junta.)"],
+        questions: [
+            { q: "¿Cómo se dice 'mamá' en inglés?", options: ["Mother", "Father", "Sister"], answer: "Mother" },
+            { q: "¿Qué animal es 'cat'?", options: ["Perro", "Gato", "Pájaro"], answer: "Gato" },
+            { q: "Completa: My ____ is funny.", options: ["brother", "sister", "dog"], answer: "brother" }
+        ]
+    },
+    { 
+        title: "Nivel 4: Comida y Bebida",
+        explanation: "La comida es divertida: 'Apple' (manzana), 'Bread' (pan), 'Milk' (leche), 'Water' (agua). Frases: 'I eat an apple' (Como una manzana). Aprende a pedir: 'Can I have water?' (¿Puedo tener agua?). Incluye hábitos saludables, como comer frutas. Practica listas de compras en inglés para mejorar vocabulario.",
+        examples: ["I like apples and bread. (Me gustan las manzanas y el pan.)", "Drink milk every day. (Bebe leche todos los días.)", "The pizza is delicious. (La pizza está deliciosa.)", "Can I have some water? (¿Puedo tener un poco de agua?)"],
+        questions: [
+            { q: "¿Cómo se dice 'agua' en inglés?", options: ["Water", "Milk", "Bread"], answer: "Water" },
+            { q: "¿Qué comida es 'apple'?", options: ["Pan", "Manzana", "Pizza"], answer: "Manzana" },
+            { q: "Completa: I eat ____ for breakfast.", options: ["bread", "water", "milk"], answer: "bread" }
+        ]
+    },
+    { 
+        title: "Nivel 5: Tiempo y Clima",
+        explanation: "El tiempo: 'Today' (hoy), 'Tomorrow' (mañana), 'Yesterday' (ayer). Clima: 'Sunny' (soleado), 'Rainy' (lluvioso), 'Cold' (frío). Frases: 'It is sunny today' (Hace sol hoy). Usa 'What time is it?' (¿Qué hora es?). Esto ayuda a planear días y hablar del clima. ¡Observa el clima afuera y descríbelo!",
+        examples: ["Today is sunny. (Hoy hace sol.)", "Tomorrow will be rainy. (Mañana lloverá.)", "It is cold outside. (Hace frío afuera.)", "What time is it? It's 3 o'clock. (¿Qué hora es? Son las 3.)"],
+        questions: [
+            { q: "¿Cómo se dice 'hoy' en inglés?", options: ["Today", "Tomorrow", "Yesterday"], answer: "Today" },
+            { q: "¿Qué significa 'sunny'?", options: ["Lluvioso", "Soleado", "Frío"], answer: "Soleado" },
+            { q: "Completa: It is ____ today.", options: ["rainy", "sunny", "cold"], answer: "sunny" }
+        ]
+    },
+    { 
+        title: "Nivel 6: Verbos Básicos (To Be y To Have)",
+        explanation: "Verbos esenciales: 'To be' (ser/estar) - I am, you are, he/she is. 'To have' (tener) - I have, you have. Ejemplos: 'I am happy' (Estoy feliz), 'She has a book' (Ella tiene un libro). Practica conjugaciones para formar oraciones. Recuerda: inglés no tiene género en verbos como español.",
+        examples: ["I am a student. (Soy estudiante.)", "You are my friend. (Eres mi amigo.)", "He has a big house. (Él tiene una casa grande.)", "We are happy. (Estamos felices.)"],
+        questions: [
+            { q: "Conjuga: I ____ happy.", options: ["am", "is", "are"], answer: "am" },
+            { q: "Conjuga: She ____ a dog.", options: ["has", "have", "is"], answer: "has" },
+            { q: "Completa: We ____ friends.", options: ["are", "am", "is"], answer: "are" }
+        ]
+    },
+    { 
+        title: "Nivel 7: Preguntas y Respuestas",
+        explanation: "Haz preguntas con 'What', 'Where', 'Who'. Respuestas simples. Ej: 'What is your name?' (¿Cuál es tu nombre?). 'Where do you live?' (¿Dónde vives?). Practica conversaciones cortas. Esto mejora la comunicación diaria y te hace sentir seguro hablando inglés.",
+        examples: ["What is your name? My name is Ana. (¿Cuál es tu nombre? Mi nombre es Ana.)", "Where do you live? I live in Madrid. (¿Dónde vives? Vivo en Madrid.)", "Who is your teacher? Mr. Smith is. (¿Quién es tu maestro? El Sr. Smith.)"],
+        questions: [
+            { q: "¿Cómo preguntas '¿Cuál es tu nombre?'?", options: ["What is your name?", "Where do you live?", "Who is your friend?"], answer: "What is your name?" },
+            { q: "Responde: Where do you live? ____ in Spain.", options: ["I live", "You live", "He lives"], answer: "I live" },
+            { q: "Completa: ____ is your favorite color?", options: ["What", "Where", "Who"], answer: "What" }
+        ]
+    },
+    { 
+        title: "Nivel 8: Repaso Final y Vocabulario Mixto",
+        explanation: "Repasemos todo: saludos, números, familia, comida, tiempo, verbos y preguntas. Mezcla vocabulario para formar oraciones completas. Ej: 'Hello, my name is Ana. I have a dog and I eat apples.' Practica diariamente para recordar. ¡Has aprendido mucho! Sigue practicando con Jinshi.",
+        examples: ["Hello! I am 10 years old. (¡Hola! Tengo 10 años.)", "My family has a cat. We eat bread. (Mi familia tiene un gato. Comemos pan.)", "Today is sunny. What time is it? (Hoy hace sol. ¿Qué hora es?)"],
+        questions: [
+            { q: "Mezcla: ____ name is ____. I ____ a brother.", options: ["My, Ana, have", "Hello, dog, eat", "What, red, is"], answer: "My, Ana, have" },
+            { q: "¿Qué significa 'I have a sister'?", options: ["Tengo una hermana", "Soy feliz", "Hace frío"], answer: "Tengo una hermana" },
+            { q: "Completa: It is ____ and I like ____.", options: ["sunny, apples", "rainy, milk", "cold, bread"], answer: "sunny, apples" }
+        ]
+    }
+];
+
+let currentLesson = 0;
+let currentQuestion = 0;
+
+const lessonContent = document.getElementById("lesson-content");
+const practiceBox = document.getElementById("practice-box");
+const levelTitle = document.getElementById("level-title");
+const questionText = document.getElementById("question-text");
+const answersContainer = document.getElementById("answers-container");
+const feedback = document.getElementById("feedback");
+const nextBtn = document.getElementById("next-btn");
+const startPractice = document.getElementById("start-practice");
+
+function showLesson() {
+    const lesson = lessons[currentLesson];
+    lessonContent.innerHTML = `<h2>${lesson.title}</h2>
+        <p>${lesson.explanation}</p>
+        <p><strong>Ejemplos:</strong></p>
+        <ul>${lesson.examples.map(ex => `<li>${ex}</li>`).join("")}</ul>`;
+}
+
+function startPracticeLevel() {
+    lessonContent.style.display = "none";
+    startPractice.style.display = "none";
+    practiceBox.style.display = "block";
+    loadQuestion();
+}
+
+function loadQuestion() {
+    const lesson = lessons[currentLesson];
+    const question = lesson.questions[currentQuestion];
+
+    levelTitle.textContent = lesson.title;
+    questionText.textContent = question.q;
+    answersContainer.innerHTML = "";
+    question.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.className = "answer-btn";
+        btn.onclick = () => checkAnswer(opt);
+        answersContainer.appendChild(btn);
+    });
+    feedback.textContent = "";
+    nextBtn.style.display = "none";
+}
+
+function checkAnswer(selected) {
+    const question = lessons[currentLesson].questions[currentQuestion];
+    if(selected === question.answer){
+        feedback.textContent = "✅ ¡Correcto!";
+        feedback.style.color = "#32CD32";
+    } else {
+        feedback.textContent = `❌ Incorrecto. La respuesta correcta era ${question.answer}`;
+        feedback.style.color = "#FF4500";
+    }
+    nextBtn.style.display = "inline-block";
+}
+
+nextBtn.onclick = () => {
+    currentQuestion++;
+    const lesson = lessons[currentLesson];
+    if(currentQuestion >= lesson.questions.length){
+        currentLesson++;
+        currentQuestion = 0;
+        if(currentLesson >= lessons.length){
+            practiceBox.innerHTML = "<h2>🎉 ¡Felicidades! Has completado la lección de Inglés</h2>";
+            return;
+        } else {
+            lessonContent.style.display = "block";
+            practiceBox.style.display = "none";
+            showLesson();
+            startPractice.style.display = "inline-block";
+        }
+    } else {
+        loadQuestion();
+    }
+}
+
+startPractice.onclick = () => startPracticeLevel();
+
+showLesson();
+</script>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="section-title">Nuestra Mascota</h2>
+<p class="mb-4">Conoce a nuestra mascota 3D que te acompañará en tu aprendizaje </p>
+
+<div class="text-center mb-4">
+    <img src="{{ url_for('static', filename='image/mascota.png') }}" 
+         class="img-fluid rounded shadow bounce-img" width="300">
+</div>
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card p-4 shadow" style="background:#f9f1c6;">
+            <h3>Aprende con Mascota</h3>
+            <p>La mascota te dará tips y pequeñas sorpresas mientras aprendes</p> 
